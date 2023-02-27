@@ -1,4 +1,11 @@
 const tweets = [];
+class Tweet {
+	constructor(username, tweet, avatar) {
+		this.username = username;
+		this.tweet = tweet;
+		this.avatar = avatar;
+	}
+}
 
 export function postTweet(req, res) {
 	const { tweet, username } = req.body;
@@ -8,8 +15,8 @@ export function postTweet(req, res) {
 	}
 
 	const { avatar } = usuarios.find((user) => user.username === username);
-
-	tweets.push({ username, tweet, avatar });
+	const newTweet = new Tweet(username, tweet, avatar);
+	tweets.push(newTweet);
 
 	res.status(201).send("OK, seu tweet foi criado");
 }
